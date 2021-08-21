@@ -1,7 +1,4 @@
 import os
-
-import null as null
-from matplotlib import pyplot as plt
 import csv
 import re
 fileNames = []
@@ -17,7 +14,7 @@ print(fileNames)
 for i in range(len(fileNames)):
     ## CSV filename
     fileName = fileNames[i]
-    fileNameForWrite = fileName[:-4] + "Edited.csv"
+    fileNameForWrite = fileName[:-4] + "Edited_25-=30.csv"
     print(fileNameForWrite)
     print("current filename: ")
     print(fileName)
@@ -30,13 +27,15 @@ for i in range(len(fileNames)):
         reader = csv.reader(csvfile)
         ## for every row in the csv
         print(reader)
+        count = 0
         for row in reader:
             #print("row")
             #print(row)
             ## make sure to include the headers row
-            if (row[0] == "ï»¿Sentence") | (30 < len(re.findall(r'\w+', row[0]))):
+            if ((count == 0) or ((30 >= len(re.findall(r'\w+', row[0]))) and (25 < len(re.findall(r'\w+', row[0]))))):
                 ## append rows to rows
                 rows.append(row)
+            count += 1
         print(sentenceLength)
         ## get total number of rows
         print("Total number of rows: %d" % (reader.line_num))
